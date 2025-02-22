@@ -8,25 +8,33 @@
 print("Hinterland Clinic - Patient Servicing Console")
 
 # Hard-Coded Definitions
-doc1 = 50  #Clinician Charges
+programRun = 0 # "True/False" for if code/program is running
+doc1 = 50      # Clinician Charges
 doc2 = 90
 doc3 = 120
 doc4 = 160
+docPrice = 0
 
 # User-Defined Information
-patient4Proc = input("Is there a Patient to Process? (Say 'Yes', 'Finish', 'No', or 'Stop')")  # Storage for Patients Waiting
-patientName = " " # Space for temporary value, "Variable" type
+patient4Proc = input("Is there a Patient to Process? (Say 'Yes', 'Finish', 'No', or 'Stop') ")
+patientName = " "  # Space for temporary value, "Variable" type
 clinicianReq = " " # Space for temporary value, "Variable" type
 
-if patient4Proc[0].lower() == 'y':
-    patientName = str(input("Please enter the patient's name: "))
-    clinicianReq = str(input("How many Clinicians will the patient require? (Number range between 1 and 4) "))
+# User-Interactive
+int(programRun) + 1
+while programRun = 1
+    if patient4Proc[0].lower() == 'y':
+        patientName = str(input("Please enter the patient's name: "))
+        clinicianReq = str(input("How many Clinicians will the patient require? (Number range between 1 and 4) "))
+        if clinicianReq == 1:
+            int(docPrice) + doc1
 
-if patient4Proc[0].lower() == 'n' or 's' or 'f':
-    print("Thank you! Shutting down...")
+    if patient4Proc[0].lower() == 'n' or 's' or 'f':
+        int(programRun) - 1
+        print("Thank you! Shutting down...")
 
-elif patient4Proc[0].lower():
-    print("Error - Please enter one of the following answers: 'Yes', 'Finish', 'No', or 'Stop'.")
+    elif patient4Proc[0].lower():
+        print("Error - Please enter one of the following answers: 'Yes', 'Finish', 'No', or 'Stop'.")
 
 
 # Testing Sector - REMEMBER TO REMOVE BEFORE FINAL COMMIT!!
