@@ -27,7 +27,7 @@ healthCard = " "
 rxCount = 0
 itemCount = 0
 itemCosts = 0
-taxCalc = 0
+taxCalc = 0.07
 taxTotal = 0
 addCharge = 0
 
@@ -41,27 +41,22 @@ while programRun == 1:
         patientName = input("Please enter the patient's name: ")
         clinicianInput = input("How many Clinicians will the patient require? (Range of 1 to 4) ")
         patient4Proc = "reask"
-        print("patient4Proc has been set to " + patient4Proc)
 
         if clinicianInput == '1' or clinicianInput[0:2].lower() == 'on':
             clinicianReq = 1 # Ensures that "on" is changed to 1 for the "while not" below.
             docPrice = docPrice + doc1
-            #int(clinicianInput) + 1
 
         elif clinicianInput == "2" or clinicianInput[0:2].lower() == 'tw':
             clinicianReq = 2
             docPrice = docPrice + doc2
-            #int(clinicianInput) = 1
 
         elif clinicianInput == "3" or clinicianInput[0:2].lower() == 'th':
             clinicianReq = 3
             docPrice = docPrice + doc3
-            #int(clinicianInput) = 1
 
         elif clinicianInput == "4" or clinicianInput[0:2].lower() == 'fo':
             clinicianReq = 4
             docPrice = docPrice + doc4
-            #int(clinicianInput) = 1
 
         while not clinicianReq <= 4 and clinicianReq >= 1:
             print("Error - Please enter a valid number entry for clinicians required.")
@@ -73,19 +68,13 @@ while programRun == 1:
 
 # Calculation Sectors
 
-    #  Prescription Calculations  #
+    #  Prescription Calculation  #
     itemCosts = int(rxCount) * int(itemCount)
-    taxCalc = int(itemCosts) * 0.07
-    taxTotal = int(taxTotal) + int(taxCalc)
-    print("itemCosts " + str(itemCosts))
-    print("taxCalc " + str(taxCalc))
-    print("taxTotal " + str(taxTotal))
 
+    #  HealthCard Calculations Below  #
     if healthCard[0:2].lower() == "ns":
         itemCosts = itemCosts + 0
         docPrice = docPrice + 0
-        print("itemCosts " + str(itemCosts))
-        print("docPrice" + str(docPrice))
 
     if healthCard[0:2].lower() == "nb" or "pe" or "nl":
         addCharge = 0.10
@@ -93,10 +82,6 @@ while programRun == 1:
         docPriceChrg = docPrice * addCharge
         itemCosts = itemCosts + itemCostChrg
         docPrice = docPrice + docPriceChrg
-        print("itemCosts " + str(itemCosts))
-        print("docPrice" + str(docPrice))
-        print("itemCostChrg" + str(itemCostChrg))
-        print("docPriceChrg" + str(docPriceChrg))
 
     if healthCard[0:2].lower() == "us":
         addCharge = 1
@@ -104,10 +89,6 @@ while programRun == 1:
         docPriceChrg = docPrice * addCharge
         itemCosts = itemCosts + itemCostChrg
         docPrice = docPrice + docPriceChrg
-        print("itemCosts " + str(itemCosts))
-        print("docPrice" + str(docPrice))
-        print("itemCostChrg" + str(itemCostChrg))
-        print("docPriceChrg" + str(docPriceChrg))
 
     if healthCard[0:2].lower() == "on" or "qc" or "mb":
         addCharge = 0.20
@@ -115,10 +96,6 @@ while programRun == 1:
         docPriceChrg = docPrice * addCharge
         itemCosts = itemCosts + itemCostChrg
         docPrice = docPrice + docPriceChrg
-        print("itemCosts " + str(itemCosts))
-        print("docPrice" + str(docPrice))
-        print("itemCostChrg" + str(itemCostChrg))
-        print("docPriceChrg" + str(docPriceChrg))
 
     if healthCard[0:2].lower() == "bc" or "ab" or "sk":
         addCharge = 0.25
@@ -126,10 +103,6 @@ while programRun == 1:
         docPriceChrg = docPrice * addCharge
         itemCosts = itemCosts + itemCostChrg
         docPrice = docPrice + docPriceChrg
-        print("itemCosts " + str(itemCosts))
-        print("docPrice" + str(docPrice))
-        print("itemCostChrg" + str(itemCostChrg))
-        print("docPriceChrg" + str(docPriceChrg))
 
     if healthCard[0:2].lower() == "nt" or "nu" or "yt":
         addCharge = 0.20
@@ -137,10 +110,6 @@ while programRun == 1:
         docPriceChrg = docPrice * addCharge
         itemCosts = itemCosts + itemCostChrg
         docPrice = docPrice + docPriceChrg
-        print("itemCosts " + str(itemCosts))
-        print("docPrice" + str(docPrice))
-        print("itemCostChrg" + str(itemCostChrg))
-        print("docPriceChrg" + str(docPriceChrg))
 
     elif healthCard[0:2].lower():
         addCharge = 0.50
@@ -148,12 +117,18 @@ while programRun == 1:
         docPriceChrg = docPrice * addCharge
         itemCosts = itemCosts + itemCostChrg
         docPrice = docPrice + docPriceChrg
-        print("itemCosts " + str(itemCosts))
-        print("docPrice" + str(docPrice))
-        print("itemCostChrg" + str(itemCostChrg))
-        print("docPriceChrg" + str(docPriceChrg))
 
-    
+
+    docTax = docPrice * taxCalc
+    rxTax = itemCosts * taxCalc
+    taxTotal = docTax + rxTax
+    staySubtotal = itemCosts + docPrice
+    stayTotal = staySubtotal + taxTotal
+
+    print("Clinic Charges for " + patientName + ": $" + str(docPrice))
+    print("Prescription costs: $" + str(itemCosts))
+    print("Provincial Tax: $" + str(taxTotal))
+    print("Total Charges for " + patientName + ": $" + str(stayTotal))
 
 # Continuation from "if" statements above the calculation sector
 
@@ -167,10 +142,3 @@ while programRun == 1:
     else:
         print("Error - Please enter one of the following answers: 'Yes', 'Finish', 'No', or 'Stop'.")
         clinician4Proc = input("Is there a Patient to Process? ")
-
-
-# Testing Sector - REMEMBER TO REMOVE BEFORE FINAL COMMIT!!
-print("patient4Proc " + str(patient4Proc))
-print("patientName " + str(patientName))
-print("clinicianReq " + str(clinicianReq))
-print("docPrice " + str(docPrice))
