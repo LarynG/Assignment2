@@ -39,26 +39,22 @@ while programRun == 1:
 
     while patient4Proc[0].lower() == 'y':
         patientName = input("Please enter the patient's name: ")
-        clinicianInput = input("How many Clinicians will the patient require? (Range of 1 to 4) ")
+        clinicianInput = int(input("How many Clinicians will the patient require? (Range of 1 to 4) "))
         patient4Proc = "reask"
 
-        if clinicianInput == '1' or clinicianInput[0:2].lower() == 'on':
-            clinicianReq = 1 # Ensures that "on" is changed to 1 for the "while not" below.
+        if clinicianInput == 1:
             docPrice = docPrice + doc1
 
-        elif clinicianInput == "2" or clinicianInput[0:2].lower() == 'tw':
-            clinicianReq = 2
+        elif clinicianInput == 2:
             docPrice = docPrice + doc2
 
-        elif clinicianInput == "3" or clinicianInput[0:2].lower() == 'th':
-            clinicianReq = 3
+        elif clinicianInput == 3:
             docPrice = docPrice + doc3
 
-        elif clinicianInput == "4" or clinicianInput[0:2].lower() == 'fo':
-            clinicianReq = 4
+        elif clinicianInput == 4:
             docPrice = docPrice + doc4
 
-        while not clinicianReq <= 4 and clinicianReq >= 1:
+        while not int(clinicianInput) <= 4 and int(clinicianInput) >= 1:
             print("Error - Please enter a valid number entry for clinicians required.")
             clinicianInput = input("How many Clinicians will the patient require? (Range of 1 to 4) ")
 
@@ -76,48 +72,47 @@ while programRun == 1:
         itemCosts = itemCosts + 0
         docPrice = docPrice + 0
 
-    if healthCard[0:2].lower() == "nb" or "pe" or "nl":
+    elif healthCard[0:2].lower() in ("nb", "pe", "nl"): #== "nb" or "pe" or "nl":
         addCharge = 0.10
         itemCostChrg = itemCosts * addCharge
         docPriceChrg = docPrice * addCharge
         itemCosts = itemCosts + itemCostChrg
         docPrice = docPrice + docPriceChrg
 
-    if healthCard[0:2].lower() == "us":
+    elif healthCard[0:2].lower() == "us":
         addCharge = 1
         itemCostChrg = itemCosts * addCharge
         docPriceChrg = docPrice * addCharge
         itemCosts = itemCosts + itemCostChrg
         docPrice = docPrice + docPriceChrg
 
-    if healthCard[0:2].lower() == "on" or "qc" or "mb":
+    elif healthCard[0:2].lower() in ("on", "qc", "mb"): #== "on" or "qc" or "mb":
         addCharge = 0.20
         itemCostChrg = itemCosts * addCharge
         docPriceChrg = docPrice * addCharge
         itemCosts = itemCosts + itemCostChrg
         docPrice = docPrice + docPriceChrg
 
-    if healthCard[0:2].lower() == "bc" or "ab" or "sk":
+    elif healthCard[0:2].lower() in ("bc", "ab", "sk"): #== "bc" or "ab" or "sk":
         addCharge = 0.25
         itemCostChrg = itemCosts * addCharge
         docPriceChrg = docPrice * addCharge
         itemCosts = itemCosts + itemCostChrg
         docPrice = docPrice + docPriceChrg
 
-    if healthCard[0:2].lower() == "nt" or "nu" or "yt":
+    elif healthCard[0:2].lower() in ("nt", "nu", "yt"): #== "nt" or "nu" or "yt":
         addCharge = 0.20
         itemCostChrg = itemCosts * addCharge
         docPriceChrg = docPrice * addCharge
         itemCosts = itemCosts + itemCostChrg
         docPrice = docPrice + docPriceChrg
 
-    elif healthCard[0:2].lower():
+    else:
         addCharge = 0.50
         itemCostChrg = itemCosts * addCharge
         docPriceChrg = docPrice * addCharge
         itemCosts = itemCosts + itemCostChrg
         docPrice = docPrice + docPriceChrg
-
 
     docTax = docPrice * taxCalc
     rxTax = itemCosts * taxCalc
