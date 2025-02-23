@@ -64,22 +64,9 @@ while programRun == 1:
             print("Error - Please enter a valid number entry for clinicians required.")
             clinicianInput = input("How many Clinicians will the patient require? (Range of 1 to 4) ")
 
-    else:
-        print("Error - Please enter one of the following answers: 'Yes', 'Finish', 'No', or 'Stop'.")
-        clinician4Proc = input("Is there a Patient to Process? ")
-
-    if rxCount = 1
-        itemCosts = 
-
-    if rxCount = 2
-
-
-    if rxCount = 3
-
-
-    if rxCount = 4
-
-
+# Calculation Sectors
+    itemCosts = rxCount * itemCount
+    print(itemCosts)
 
     #if healthCard[0:2].lower() == "ns":
 
@@ -95,13 +82,18 @@ while programRun == 1:
 
     #elif healthCard[0:2].lower():
 
-if patient4Proc[0].lower() == 'n' or 's' or 'f':
-    print("Thank you! Shutting down...")
-    int(programRun) = 0
+# Continuation from "if" statements above the calculation sector
+    if patient4Proc[0].lower() == 'n' or 's' or 'f':
+        print("Thank you! Shutting down...")
+        programRun = 0
+    
+    else:
+        print("Error - Please enter one of the following answers: 'Yes', 'Finish', 'No', or 'Stop'.")
+        clinician4Proc = input("Is there a Patient to Process? ")
 
 
 # Testing Sector - REMEMBER TO REMOVE BEFORE FINAL COMMIT!!
-print(patient4Proc)
-print(patientName)
-print(clinicianReq)
-print(docPrice)
+print("patient4Proc " + str(patient4Proc))
+print("patientName " + str(patientName))
+print("clinicianReq " + str(clinicianReq))
+print("docPrice " + str(docPrice))
