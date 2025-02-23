@@ -27,18 +27,21 @@ healthCard = " "
 rxCount = 0
 itemCount = 0
 itemCosts = 0
+taxCalc = 0
+taxTotal = 0
+addCharge = 0
+
+itemCostChrg = 0
+docPriceChrg = 0
 
 # User-Interactive
 while programRun == 1:
 
-    if patient4Proc[0].lower() == 'r':
-        patient4Proc = input("Is there another Patient to Process? (Say 'Yes', 'Finish', 'No', or 'Stop') ") 
-
-    if patient4Proc[0].lower() == 'y':
+    while patient4Proc[0].lower() == 'y':
         patientName = input("Please enter the patient's name: ")
         clinicianInput = input("How many Clinicians will the patient require? (Range of 1 to 4) ")
         patient4Proc = "reask"
-        print(patient4Proc)
+        print("patient4Proc has been set to " + patient4Proc)
 
         if clinicianInput == '1' or clinicianInput[0:2].lower() == 'on':
             clinicianReq = 1 # Ensures that "on" is changed to 1 for the "while not" below.
@@ -46,43 +49,117 @@ while programRun == 1:
             #int(clinicianInput) + 1
 
         elif clinicianInput == "2" or clinicianInput[0:2].lower() == 'tw':
-            int(clinicianReq) == 2
-            docPrice + doc2
+            clinicianReq = 2
+            docPrice = docPrice + doc2
             #int(clinicianInput) = 1
 
         elif clinicianInput == "3" or clinicianInput[0:2].lower() == 'th':
-            int(clinicianReq) == 3
-            docPrice + doc3
+            clinicianReq = 3
+            docPrice = docPrice + doc3
             #int(clinicianInput) = 1
 
         elif clinicianInput == "4" or clinicianInput[0:2].lower() == 'fo':
-            int(clinicianReq) == 4
-            docPrice + doc4
+            clinicianReq = 4
+            docPrice = docPrice + doc4
             #int(clinicianInput) = 1
 
         while not clinicianReq <= 4 and clinicianReq >= 1:
             print("Error - Please enter a valid number entry for clinicians required.")
             clinicianInput = input("How many Clinicians will the patient require? (Range of 1 to 4) ")
 
+    rxCount = input("How many Prescriptions for " + patientName + "? ")
+    itemCount = input("How many individual Prescription Items in total? ")
+    healthCard = input("Please enter " + patientName + "'s Health Card Number: ")
+
 # Calculation Sectors
-    itemCosts = rxCount * itemCount
-    print(itemCosts)
 
-    #if healthCard[0:2].lower() == "ns":
+    #  Prescription Calculations  #
+    itemCosts = int(rxCount) * int(itemCount)
+    taxCalc = int(itemCosts) * 0.07
+    taxTotal = int(taxTotal) + int(taxCalc)
+    print("itemCosts " + str(itemCosts))
+    print("taxCalc " + str(taxCalc))
+    print("taxTotal " + str(taxTotal))
 
-    #if healthCard[0:2].lower() == "nb" or "pe" or "nl":
+    if healthCard[0:2].lower() == "ns":
+        itemCosts = itemCosts + 0
+        docPrice = docPrice + 0
+        print("itemCosts " + str(itemCosts))
+        print("docPrice" + str(docPrice))
 
-    #if healthCard[0:2].lower() == "us":
+    if healthCard[0:2].lower() == "nb" or "pe" or "nl":
+        addCharge = 0.10
+        itemCostChrg = itemCosts * addCharge
+        docPriceChrg = docPrice * addCharge
+        itemCosts = itemCosts + itemCostChrg
+        docPrice = docPrice + docPriceChrg
+        print("itemCosts " + str(itemCosts))
+        print("docPrice" + str(docPrice))
+        print("itemCostChrg" + str(itemCostChrg))
+        print("docPriceChrg" + str(docPriceChrg))
+
+    if healthCard[0:2].lower() == "us":
+        addCharge = 1
+        itemCostChrg = itemCosts * addCharge
+        docPriceChrg = docPrice * addCharge
+        itemCosts = itemCosts + itemCostChrg
+        docPrice = docPrice + docPriceChrg
+        print("itemCosts " + str(itemCosts))
+        print("docPrice" + str(docPrice))
+        print("itemCostChrg" + str(itemCostChrg))
+        print("docPriceChrg" + str(docPriceChrg))
+
+    if healthCard[0:2].lower() == "on" or "qc" or "mb":
+        addCharge = 0.20
+        itemCostChrg = itemCosts * addCharge
+        docPriceChrg = docPrice * addCharge
+        itemCosts = itemCosts + itemCostChrg
+        docPrice = docPrice + docPriceChrg
+        print("itemCosts " + str(itemCosts))
+        print("docPrice" + str(docPrice))
+        print("itemCostChrg" + str(itemCostChrg))
+        print("docPriceChrg" + str(docPriceChrg))
+
+    if healthCard[0:2].lower() == "bc" or "ab" or "sk":
+        addCharge = 0.25
+        itemCostChrg = itemCosts * addCharge
+        docPriceChrg = docPrice * addCharge
+        itemCosts = itemCosts + itemCostChrg
+        docPrice = docPrice + docPriceChrg
+        print("itemCosts " + str(itemCosts))
+        print("docPrice" + str(docPrice))
+        print("itemCostChrg" + str(itemCostChrg))
+        print("docPriceChrg" + str(docPriceChrg))
+
+    if healthCard[0:2].lower() == "nt" or "nu" or "yt":
+        addCharge = 0.20
+        itemCostChrg = itemCosts * addCharge
+        docPriceChrg = docPrice * addCharge
+        itemCosts = itemCosts + itemCostChrg
+        docPrice = docPrice + docPriceChrg
+        print("itemCosts " + str(itemCosts))
+        print("docPrice" + str(docPrice))
+        print("itemCostChrg" + str(itemCostChrg))
+        print("docPriceChrg" + str(docPriceChrg))
+
+    elif healthCard[0:2].lower():
+        addCharge = 0.50
+        itemCostChrg = itemCosts * addCharge
+        docPriceChrg = docPrice * addCharge
+        itemCosts = itemCosts + itemCostChrg
+        docPrice = docPrice + docPriceChrg
+        print("itemCosts " + str(itemCosts))
+        print("docPrice" + str(docPrice))
+        print("itemCostChrg" + str(itemCostChrg))
+        print("docPriceChrg" + str(docPriceChrg))
+
     
-    #if healthCard[0:2].lower() == "on" or "qc" or "mb":
-
-    #if healthCard[0:2].lower() == "bc" or "ab" or "sk":
-
-    #if healthCard[0:2].lower() == "nt" or "nu" or "yt":
-
-    #elif healthCard[0:2].lower():
 
 # Continuation from "if" statements above the calculation sector
+
+    if patient4Proc[0].lower() == 'r':
+        patient4Proc = input("Is there another Patient to Process? (Say 'Yes', 'Finish', 'No', or 'Stop') ") 
+
     if patient4Proc[0].lower() == 'n' or 's' or 'f':
         print("Thank you! Shutting down...")
         programRun = 0
